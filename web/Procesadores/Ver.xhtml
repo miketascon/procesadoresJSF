@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Registrar Procesador</ui:define>        
+        <ui:define name="body">
+
+            <f:view>
+
+
+                <h:form>
+                    <h1><h:outputText value="View"/></h1>
+                    <p:panelGrid columns="2">
+                        <h:outputText value="IdProcesador:"/>
+                        <h:outputText value="#{procesadoresController.procesadoresActual.idProcesador}" title="IdProcesador"/>
+                        <h:outputText value="Marca:"/>
+                        <h:outputText value="#{procesadoresController.procesadoresActual.marca}" title="Marca"/>
+                        <h:outputText value="Modelo:"/>
+                        <h:outputText value="#{procesadoresController.procesadoresActual.modelo}" title="Modelo"/>
+                        <h:outputText value="FechaVenta:"/>
+                        <h:outputText value="#{procesadoresController.procesadoresActual.fechaVenta}" title="FechaVenta">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="Precio:"/>
+                        <h:outputText value="#{procesadoresController.procesadoresActual.precio}" title="Precio"/>
+                        <h:outputText value="Entregado:"/>
+                        <h:outputText value="#{procesadoresController.procesadoresActual.entregado}" title="Entregado"/>
+                    </p:panelGrid>
+                    <h:button value="Inicio" outcome="/index"/>
+                    <h:button value="Listar" outcome="/faces/Procesadores/Lista"/>  
+                </h:form>
+            </f:view>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

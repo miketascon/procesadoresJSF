@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Lista</ui:define>        
+        <ui:define name="body">
+            <f:view>
+
+
+                <h:form>
+
+                    <p:commandButton value="Registrar procesador"  action="#{procesadoresController.prepareCreate}"/>
+                    <h1><h:outputText value="List"/></h1>
+                    <p:dataTable value="#{procesadoresController.listaProcesadores}" var="item"
+                                 rows="10" id="procesadores" 
+                                 paginator="true"
+                                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15"
+
+                                 >
+                        <p:column filterBy="#{item.idProcesador}">
+                            <f:facet name="header">
+                                <h:outputText value="IdProcesador"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProcesador}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.marca}">
+                            <f:facet name="header">
+                                <h:outputText value="Marca"/>
+                            </f:facet>
+                            <h:outputText value="#{item.marca}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.modelo}">
+                            <f:facet name="header">
+                                <h:outputText value="Modelo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.modelo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="FechaVenta"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaVenta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Entregado"/>
+                            </f:facet>
+                            <h:outputText value="#{item.entregado}"/>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton icon="ui-icon-search" action="#{procesadoresController.prepareView()}">
+                                <f:setPropertyActionListener value="#{item}" target="#{procesadoresController.procesadoresActual}"/>
+                            </p:commandButton>
+                            <p:commandButton icon="ui-icon-pencil" action="#{procesadoresController.prepareEdit}">
+                                <f:setPropertyActionListener value="#{item}" target="#{procesadoresController.procesadoresActual}"/>
+                            </p:commandButton>
+
+                            <p:commandButton icon="ui-icon-trash" action="#{procesadoresController.deleteProcesador()}"
+                                             process="@this" update="procesadores">
+                                <p:confirm header="Confirmación" message="¿Esta seguro que desea eliminar el registro?" icon="ui-icon-alert" />
+                                <f:setPropertyActionListener value="#{item}" target="#{procesadoresController.procesadoresActual}"/>
+
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </f:view>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
